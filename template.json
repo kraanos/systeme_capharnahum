@@ -1,0 +1,458 @@
+{
+  "Actor": {
+    "types": ["character", "pnj", "pnjgenere"],
+    "templates" : {
+      "titre":{
+        "label" :"",
+        "value":""
+      },
+      "vertus" :{
+        "value" : 1,
+          "min" : 0,
+          "max" : 6
+      },
+      "etoile_de_vertu" :{
+        "value" : 1,
+          "min" : 0,
+          "max" : 5
+      },
+        "competences" :{
+        "value" : 0,
+          "min" : 0
+      },
+      "sous_competences" :{
+        "value" : 0,
+          "min" : 0
+      },
+      "carac_shaytan" : {
+          "value": 0,
+          "max": 6
+      }
+
+     },
+    "character": {
+
+      "isGM":{
+        "value" : true
+      },
+      "biographie": {      	
+        "label" :"Biographie",
+      	"value" :""
+      }, 
+      "sang": {
+      	"label" :"Sang",
+      	"value" :""
+      }, 
+      "nation": {
+      	"label" :"Nation, Tribu ou Cité Etat",
+      	"value" :""
+      },
+ 
+      "titre" : {
+      	"label" :"Titre",
+      	"value" :""
+      },       
+
+      "attributes" : {
+        "coordination": {
+          "label" : "Coordination",
+          "value" : 1
+        },
+        "charme": {
+          "label" : "Charme",
+          "value" : 1
+        },
+        "souffle": {
+          "label" : "Souffle",
+          "value" : 1
+        },
+        "sagesse": {
+          "label" : "Sagesse",
+          "value" : 1
+        },
+        "puissance": {
+          "label" : "Puissance",
+          "value" : 1
+        }
+        
+      },      
+          
+      "vertus": {
+        "label" : "Vertus Heroïques",
+        "foi" : {
+          "template" : ["vertus"],
+          "label" : "Foi",     
+          "etoile" : {
+            "label" : "Etoile de Foi",
+            "template" : ["etoile_de_vertu"]         
+          }
+        },
+        "bravoure" : {
+          "template" : ["vertus"],
+          "label" : "Bravoure",
+          "etoile" : {
+            "label" : "Etoile de Bravoure", 
+            "template" : ["etoile_de_vertu"]
+            }
+        },      
+        "fidelite" : {
+          "template" : ["vertus"],
+          "label" : "Loyauté",    
+          "etoile" : {
+          	"label" : "Etoile de Fidelité",
+            "template" : ["etoile_de_vertu"]
+            }
+        },
+        "heroisme" : {
+        	"label" : "Héroïsme",
+          "template" : ["vertus"]          
+          }
+        },     
+      "abilities" : {
+        "defense_passive": {
+          "label" : "Défense Passive",
+          "value" : 1,
+          "min" : 0
+        },
+        "point_de_vie": {
+          "label" : "Points de Vie",
+          "value": 10,
+          "min": 0,
+          "max": "",
+          "temp": 0,
+          "tempmax": 0
+        },
+        "init": {
+          "label" : "Initiative",
+          "value": 0,
+          "min": 1,
+          "max": 1
+        },
+        "speed": {
+          "label" : "Vitesse",
+          "value": "2 meters"            
+        },
+        "dragon" :{
+          "label" : "Dés Dragons",
+          "value" : 1,
+          "min" : 1
+        },
+        "trempe" : {
+          "label" : "Trempe",
+          "value": 0,
+          "min": 1
+          
+        },
+        "pointaventure" : {
+          "label" : "Point d'aventure",
+          "value": 0,
+          "min": 1
+          
+        },
+        "armure" : {
+          "label" : "Armure",
+          "value": 0,
+          "min": 0,
+          "max": 1
+        }
+      },
+
+      "competences": {
+        "aventurier": {
+        	"label" : "L'Aventurier",
+          "template" : ["competences"],
+          "sous_competences" : {
+            "epreuve" :{
+              "label" : "Epreuve",
+              "template" : ["sous_competences"]
+            },
+            "equitation" : {
+              "label" : "Equitation",
+              "template" : ["sous_competences"]
+            },
+            "contes" :{
+              "label" : "Contes",
+              "template" : ["sous_competences"]
+            },
+            "periples" : {
+              "label" : "Périples",
+              "template" : ["sous_competences"]
+
+            }
+          }            
+        },
+        "sage": {
+        	"label" : "Le Sage",
+          "template" : ["competences"],
+          "sous_competences" : { 
+            "science" :{
+              "label" : "Science",
+              "template" : ["sous_competences"]
+            },
+            "enseigner" : {
+              "label" : "Enseigner",
+              "template" : ["sous_competences"]
+            },
+            "peuples_et_histoire" :{
+              "label" : "Peuples et Histoire",
+              "template" : ["sous_competences"]
+            },
+            "percevoir" : {
+              "label" : "Percevoir",
+              "template" : ["sous_competences"]
+            }
+          }
+        },
+
+        "prince": {
+        	"label" : "Le Prince",
+          "template" : ["competences"],
+          "sous_competences" : {    
+
+            "ne_pas_perdre_la_face" : {
+              "label" : "Ne pas perdre la face",
+              "template" : ["sous_competences"]
+            },
+
+            "elegance" : {
+              "label" : "Elegance",
+              "template" : ["sous_competences"]
+            },
+
+            "flatter" : {
+              "label" : "Flatter",
+              "template" : ["sous_competences"]
+            },
+
+            "negoce_et_salamalecs" : {
+              "label" : "Negoce et Salamalecs",
+              "template" : ["sous_competences"]
+            }  
+
+          }            
+        },
+
+        "sorcier": {
+        	"label" : "Le Sorcier",
+          "template" : ["competences"],
+          "sous_competences" : {
+
+            "inspiration" : {
+              "label" : "Inspiration",
+              "template" : ["sous_competences"]
+            },
+            "priere" : {
+              "label" : "Prière",
+              "template" : ["sous_competences"]
+            },
+            "sacrifice" : {
+              "label" : "Sacrifice",
+              "template" : ["sous_competences"]
+            },
+            "verbe_sacre" : {
+              "label" : "Verbe Sacré",
+              "template" : ["sous_competences"]
+            }
+          }          
+        },
+
+        "guerrier": {
+        	"label" : "Le Guerrier",
+          "template" : ["competences"],
+          "sous_competences" : {
+
+            "arme" :{
+              "label" : "Arme",
+              "template" : ["sous_competences"]
+            },
+            "commander" : {
+              "label" : "Commander",
+              "template" : ["sous_competences"]
+            },
+            "entrainement" : {
+              "label" : "Entraînement",
+              "template" : ["sous_competences"]
+            },
+            "impressionner" : {
+              "label" : "Impressionner",
+              "template" : ["sous_competences"]
+            }
+            
+          }           
+        },
+
+        "poete": {
+        	"label" : "Le Poète",
+          "template" : ["competences"],
+          "sous_competences" : {
+
+            "galvaniser" : {
+              "label" : "Galvaniser",
+              "template" : ["sous_competences"]
+                },
+            "comedie" : {
+              "label" : "Comedie",
+              "template" : ["sous_competences"]
+            },
+            "poesie" : {
+              "label" : "Poesie",
+              "template" : ["sous_competences"]
+            },
+            "musique" : {
+              "label" : "Musique",
+              "template" : ["sous_competences"]
+            }
+          }          
+        },
+
+        "malandrin": {
+        	"label" : "Le Malandrin",
+          "template" : ["competences"],
+          "sous_competences" : {
+            "assassinat" : {
+              "label" : "Assassinat",
+              "template" : ["sous_competences"]
+            },
+            "detrousser" : {
+              "label" : "Détrousser",
+              "template" : ["sous_competences"]
+            },
+            "discretion" : {
+              "label" : "Discretion",
+              "template" : ["sous_competences"]
+            },
+            "s_introduire" : {
+              "label" : "S'introduire",
+              "template" : ["sous_competences"]
+            }
+          }          
+        },
+        "travailleur": {
+        	"label" : "Le Travailleur",
+          "template" : ["competences"],
+          "sous_competences" : {
+      
+            "agriculture" : {
+              "label" : "Agriculture",
+              "template" : ["sous_competences"]
+            },
+            "artisanat" : {
+              "label" : "Artisanat",
+              "template" : ["sous_competences"]
+            },
+            "compagnonnage" : {
+              "label" : "Compagnonnage",
+              "template" : ["sous_competences"]
+            },
+            "tenir_le_coup" : {
+              "template" : ["sous_competences"]
+            } 
+          }          
+        } 
+      },
+      "shaytan":{
+        "pointaventure" :{
+          "value" : 0    
+        },
+        "progressiondutatouage": {
+          "label" : "Progression du Tatouage" ,
+          "value": 0,
+          "max" : 100    
+        },      
+        "possession": {
+          "label" : "Possession" ,
+          "template" : ["carac_shaytan"]
+        },
+        "illusion":{
+          "label" : "Illusion" ,
+          "template" : ["carac_shaytan"]
+        },
+        "apparitions": {
+          "label" : "Apparitions" ,
+          "template" : ["carac_shaytan"]
+        },
+        "orchestrationinterieure":{
+          "label" : "Orchestration Interieure" ,
+          "template" : ["carac_shaytan"]
+        },
+        "vervemagique": {
+          "label" : "Verve Magique" ,
+          "template" : ["carac_shaytan"]
+        },
+        "cauchemars":{
+          "label" : "Cauchemars" ,
+          "template" : ["carac_shaytan"]
+        }
+    }
+  },   
+
+    "pnj" : {
+
+    },
+    "pnjgenere" : {
+
+    }
+  },
+  "Item": {
+    "types": [
+      "item",
+      "parole"
+    ],
+    "templates": {
+      "itemDescription": {
+        "description": ""
+      },
+      "parole" : {
+        "description" : "",
+        "constellation" : false,
+        "competences_constellation" :"",
+        "carac_constellation" : "",
+        "gain" : ""
+      }
+    },
+    "item": {
+      "description": "",
+      "quantity": 1,
+      "weight": 0,
+      "attributes": {}
+    },
+    "parole": {
+      "templates": [
+        "itemDescription"
+      ],
+      "substitution": "",
+      "detail_parole" : {
+        "premiere_parole": {
+          "templates": ["itemDescription","parole"
+          ],
+          "label" : "Première Parole"
+        },
+        "deuxieme_parole": {
+          "template": ["itemDescription","parole"
+          ],
+          "label" : "Deuxième Parole"
+        },
+        "troisieme_parole": {
+          "template": ["itemDescription","parole"
+          ],
+          "label" : "Troisième Parole"
+        },
+        "quatrieme_parole": {
+          "template": ["itemDescription","parole"
+          ],
+          "label" : "Quatrième Parole"
+        },
+        "cinquieme_parole": {
+          "template": ["itemDescription","parole"
+          ],
+          "label" : "Cinquième Parole"
+        },
+        "sixieme_parole": {
+          "template": ["itemDescription","parole"
+          ],
+          "label" : "Sixième Parole"
+        }
+      }  
+    }
+  }
+}

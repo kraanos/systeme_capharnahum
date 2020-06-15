@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+@font-face {
+    font-family: 'aAwalRamadhan';
+    font-weight: 300;
+    src: url('../ui/fonts/aAwalRamadhan.ttf');
+}
+body {
+    background-image: url(../ui/backgrounds/main.jpg);
+    font-family: 'roboto', sans-serif;
+}
+#hotbar {
+    height: 60px;
+}
+#hotbar #action-bar {
+    height: 60px;
+}
+#hotbar #macro-list {
+    background-image: url(../ui/backgrounds/macrobar.png);
+    border: 0;
+    flex: 0 0 510px;
+    padding: 5px;
+    box-shadow: 1px 1px 5px 0px black;
+}
+#hotbar .macro.inactive {
+    box-shadow: unset;
+}
+#macro-list .macro {
+    border: 0;
+    background: unset;
+    box-shadow: unset;
+    background-image: url(../ui/backgrounds/macro.png);
+}
+#macro-list .macro.active {
+    background-image: url(../ui/backgrounds/activemacro.png);
+}
+#macro-list .macro:hover {
+    box-shadow: 0 0 10px #306593 inset;
+}
+#macro-list .macro.active:hover {
+    border: unset;
+}
+#hotbar .macro .macro-key {
+    background: #153b5b;
+    color: #e5e5e5;
+    border: solid 1px #e5e5e5;
+    border-radius: 6px;
+}
+#hotbar .bar-controls {
+    background-image: url(../ui/backgrounds/bluetile.png);
+    background-position: center;
+    border-radius: 5px;
+    color: #e5e5e5;
+    font-weight: bold;
+    box-shadow: 1px 1px 5px 0px black, 0 0 3px #fff inset;
+}
+#hotbar .bar-controls span.page-number {
+    line-height: 13px;
+}
+#players {
+    border-image: url(../ui/backgrounds/frame.png);
+    border-image-slice: 90 10 10 10 fill;
+    border-image-width: 90px 10px 10px 10px;
+    border-image-repeat: repeat;
+    color: #000;
+    padding-top: 53px;
+}
+#players.app {
+    background: none;
+    box-shadow: none;
+}
+#players h3 {
+    color: #153b5b;
+    margin: 3px 12px;
+    padding: 4px;
+    font-size: 28px;
+    font-family: aAwalRamadhan;
+    border-bottom: 2px groove #fffffd;
+}
+#players h3 .players-mode {
+    color: #153b5b;
+}
+#players h3 i.fas.fa-users {
+    font-size: 20px;
+}
+#players ol .player-name {
+    color: #153b5b;
+}
+#players ol .player-name.self {
+    color: #ca4a00;
+    font-weight: bold;
+}
+#players ol .player-active.active {
+    box-shadow: none;
+}

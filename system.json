@@ -1,0 +1,22 @@
+{
+  "name": "systeme_capharnahum",
+  "title": "systeme_capharnahum",
+  "description": "A rudimentary implementation of Capharnaum 2nd edition for Foundry VTT, based entirely on the Simple Worldbuilding System for Foundry designed by Atropos.",
+  "version": 0.1,
+  "minimumCoreVersion": "0.6.0",
+  "compatibleCoreVersion": "0.6.0",
+  "templateVersion": 2,
+  "author": "Atropos",
+  "esmodules": ["module/simple.js"],
+  "styles": ["styles/simple.css","styles/capharnaum.css"],
+  "packs": [],
+  "languages": [],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt"
+}

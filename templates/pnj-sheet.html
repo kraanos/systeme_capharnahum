@@ -1,0 +1,197 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="ourimTourim"></div>
+        
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1> 
+            <table class="intitule">
+                <tr>
+                    <input  class="sang"  type="text"  name="data.sang.value"  value="{{data.sang.value}}"  data-dtype="text" placeholder="Sang" />
+                    <input  class="parole"  type="text"  name="data.parole.value"  value="{{data.parole.value}}"  data-dtype="text" placeholder="Parole"  />
+                </tr> 
+                <tr> 
+                    <input  class="nation"  type="text"  name="data.nation.value"  value="{{data.nation.value}}"  data-dtype="text"  placeholder="Nation" /> 
+                    <input  class="titre"  type="text"  name="data.titre.value"  value="{{data.titre.value}}"  data-dtype="text"  placeholder="Titre" />
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="capacite">Capacité</a>
+        <a class="item" data-tab="magie">Magie</a> 
+        <a class="item" data-tab="inventaire">Inventaire</a>
+        <a class="item" data-tab="biographie">Biographie</a> 
+        {{#if actor.data.isGM }}        
+        <a class="item" data-tab="shaytan">Shaytan</a>
+        {{/if}}
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Capacité Tab --}}
+        <div class = "tab capacite" data-group="primary" data-tab="capacite">
+            <table class="caracteristiques"> 
+                <tr>
+                    <th colspan="2" class="titre2">Caracteristiques</th>
+                    {{#each actor.data.attributes as |attr key|}}
+                    <tr>
+                        <td class="rollable" value="{{key}}" data-type="jet-de-caracteristiques">{{attr.label}}
+                        </td>
+                        <td> 
+                            <input class="cases" type="text" name="data.attributes.{{key}}.value" value="{{attr.value}}" data-dtype="Number"/>   
+                        </td>           
+                    </tr>
+                    {{/each}}
+                </tr>
+                 
+            </table>
+            <div class="vertus"> 
+                {{!-- Foi --}}
+                {{data.vertus.foi.label}}
+                <input  class="cases"  type="text"  name="data.vertus.foi.value"  value="{{data.vertus.foi.value}}"  data-dtype="Number"  />  
+                {{data.vertus.foi.etoile.label}}
+                <input  class="cases"  type="text"  name="data.vertus.foi.etoile.value"  value="{{data.vertus.foi.etoile.value}}"  data-dtype="Number"  />            
+
+                {{!-- Bravoure --}}
+                {{data.vertus.bravoure.label}}
+                <input  class="cases"  type="text"  name="data.vertus.bravoure.value"  value="{{data.vertus.bravoure.value}}"  data-dtype="Number"  />  
+                {{data.vertus.bravoure.etoile.label}}
+                <input  class="cases"  type="text"  name="data.vertus.bravoure.etoile.value"  value="{{data.vertus.bravoure.etoile.value}}"  data-dtype="Number"  />  
+
+                {{!-- Fidélité --}}
+                {{data.vertus.fidelite.label}}
+                <input  class="cases"  type="text"  name="data.vertus.fidelite.value"  value="{{data.vertus.fidelite.value}}"  data-dtype="Number"  />  
+                {{data.vertus.fidelite.etoile.label}}
+                <input  class="cases"  type="text"  name="data.vertus.fidelite.etoile.value"  value="{{data.vertus.fidelite.etoile.value}}"  data-dtype="Number"  />  
+                
+                {{!-- Héroisme --}}
+                
+                {{data.vertus.heroisme.label}} 
+                <input  class="cases"  type="text"  name="data.vertus.heroisme.value"  value="{{data.vertus.heroisme.value}}"  data-dtype="Number"  />  
+            </div>
+
+            <div class="elements">
+                {{!-- Armure --}}
+                
+                {{data.abilities.armure.label}} 
+                <input  class="cases"  type="text"  name="data.abilities.armure.value"  value="{{data.abilities.armure.value}}"  data-dtype="Number"  />  
+
+                {{!-- Dés Dragons --}}       
+               
+                {{data.abilities.dragon.label}} 
+                <input  class="cases"  type="text"  name="data.abilities.dragon.value"  value="{{data.abilities.dragon.value}}"  data-dtype="Number"  required pattern="1|2|3"   />                 
+
+                {{!-- Défense passive  --}}
+                {{data.abilities.defense_passive.label}} : {{data.abilities.defense_passive.value}}
+                
+                {{!-- Trempe  --}}
+                {{data.abilities.trempe.label}} : {{data.abilities.trempe.value}}
+
+                {{!-- Points de vie  --}}
+                {{data.abilities.point_de_vie.label}}  
+                <input  class="cases"  type="text"  name="data.abilities.point_de_vie.value"  value="{{data.abilities.point_de_vie.value}}"  data-dtype="Number"  />  
+                /
+                <input  class="cases"  type="text"  name="data.abilities.point_de_vie.max"  value="{{data.abilities.point_de_vie.max}}"  data-dtype="Number"  />  
+                
+                {{!-- Initiative maximum  --}}
+                
+                <span class="rollable" value="{{key}}" data-type="jet-de-initiative">Initiave max : {{data.abilities.init.max}}</span>
+                / {{data.abilities.init.label}} :  {{data.abilities.init.value}}
+                <input  class="cases"  type="text"  name="data.abilities.init.value"  value="{{data.abilities.init.value}}"  data-dtype="Number"  />
+
+                {{!-- Point d'aventure  --}}
+                <span  >{{data.abilities.pointaventure.label}} </span>
+                <input  class="cases"  type="text"  name="data.abilities.pointaventure.value"  value="{{data.abilities.pointaventure.value}}"  data-dtype="Number"  />
+
+
+            </div > 
+
+
+            
+            {{!-- Compétences --}}
+            <div class="competences">
+            {{#each actor.data.competences as |mycomp key|}}
+                <div class="competencesGenerales">
+                    <span >{{mycomp.label}}</span>
+                    <input class="cases" type="text" name="data.competences.{{key}}.value" value="{{mycomp.value}}" data-dtype="Number"/> 
+                    
+                              
+                 {{#each sous_competences as |mysouscomp key1|}}
+                                              
+                    <div class="sousCompetences"> 
+
+                        <span class="rollable" value="{{key1}}" data-type="jet-de-sous-competences">{{mysouscomp.label}}</span>
+
+                        <input class="cases" type="text" name="data.competences.{{key}}.sous_competences.{{key1}}.value" value="{{mysouscomp.value}}" data-dtype="Number"/>        
+                    </div>
+                {{/each}}
+                </div>  
+            {{/each}}
+            </div>
+
+            <footer>                
+
+
+            </footer>
+        </div>
+
+        {{!-- Magie Tab --}}
+        <div class="tab magie" data-group="primary" data-tab="magie">
+
+            Bientôt ici il y aura de la magie
+            
+        </div>
+
+
+        {{!-- Inventaire Tab --}}
+        
+        
+
+        <div class="tab inventaire" data-group="primary" data-tab="inventaire">
+            Bientôt ici il y aura un inventaire
+            <ol class="item-list">
+            {{#each actor.items as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}">
+                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                    <h4 class="item-name">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+            </ol>
+        </div>
+
+        {{!-- Biographie Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="biographie">
+
+            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+        </div>    
+
+        {{#if actor.data.isGM }}  
+        
+            {{!-- Shaytan Tab --}}
+            {{!-- ONLY FOR GM --}}
+
+            <div class = "tab shaytan" data-group="primary" data-tab="shaytan">
+                le shaytan des joueurs
+                {{#each actor.data.shaytan as |myshaytan key|}}
+                    <div class="shaytan">
+                        <span >{{myshaytan.label}}</span>
+                        <input class="cases" type="text" name="data.shaytan.{{key}}.value" value="{{myshaytan.value}}" data-dtype="Number"/>   
+                    </div>  
+                {{/each}}
+            </div> 
+
+        {{/if}}
+    </section>
+</form>
+

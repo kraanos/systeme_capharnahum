@@ -1,0 +1,288 @@
+.worldbuilding {
+  /* Sheet Tabs */
+  /* Items List */
+  /* Attributes */
+}
+.worldbuilding .window-content {
+  height: 100%;
+  padding: 5px;
+  overflow: auto; 
+}
+.worldbuilding .sheet-header {
+  height: 140px;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+.worldbuilding .sheet-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+.worldbuilding .sheet-header .header-fields {
+  
+  height: 100%;
+  width:  100%;
+
+}
+.worldbuilding .sheet-header .header-fields .intitule {
+width: 100% ;
+display : flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+height: 30px;
+}
+.worldbuilding .sheet-header .header-fields div {
+  flex: 2 1 auto;
+}
+
+.worldbuilding .sheet-header h1.charname {
+  height: 50px;
+  padding: 0px;
+  margin: 0px 0;
+  border-bottom: 0;
+}
+.worldbuilding .sheet-header h1.charname input {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.worldbuilding .ourimTourim {
+  flex: 0 0 100px;
+  height: 55px;
+  margin-right: 10px;
+  
+  background-repeat: no-repeat;
+}
+
+.worldbuilding .ourimTourim:hover {
+  color: #000;
+  cursor: pointer;
+  text-shadow: 0 0 10px #ff0000; 
+
+}
+
+.worldbuilding .isEditable {
+  width: 25px;
+  height: 33px;
+  margin-right: 5px;
+  
+}
+
+.worldbuilding .isEditable:hover {
+  color: #000;
+  cursor: pointer;
+  text-shadow: 0 0 10px #ff0000; 
+}
+
+.worldbuilding .isNotEditable {
+  width: 25px;
+  height: 33px;
+  margin-right: 5px;
+  
+}
+
+.worldbuilding .isNotEditable:hover {
+  color: #000;
+  cursor: pointer;
+  text-shadow: 0 0 10px #ff0000; 
+}
+
+.worldbuilding .image_header {
+  width: :150px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+
+.worldbuilding  .fiche_de_perso {
+display: flex; 
+justify-content: space-around;
+
+}
+.worldbuilding .caracteristiques {
+  text-align: center;
+  valign: center;
+}
+
+.worldbuilding .vertus {
+  text-align: center;
+  valign: center;
+}
+
+.worldbuilding .combat {
+  text-align: center;
+  valign: center;
+}
+
+.worldbuilding .sang {
+  width: 45%;
+  height: 25px;
+  margin-top: 10px;
+   
+}
+.worldbuilding .parole {
+  width: 45%;
+  height: 25px;
+  margin-top: 10px;
+   
+}
+.worldbuilding .nation {
+  width: 40%;
+  height: 25px;
+
+    
+}
+.worldbuilding .titre {
+  width: 40%;
+  height: 25px;  
+}
+
+#dropper {
+  
+  height: 100%;
+  width:  100%;
+
+}
+
+.worldbuilding .competences {
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+  valign: center;
+}
+
+.worldbuilding .competencesGenerales  {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+}
+
+.worldbuilding .sousCompetences  {
+  height: 25px;
+  flex : 2 1 auto;
+}
+.worldbuilding .cases {
+  width: 40px;
+  height: 25px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.worldbuilding .rollable:hover {
+  color: #000;
+  cursor: pointer;
+  text-shadow: 0 0 10px #ff0000; 
+}
+
+.worldbuilding .sheet-body {
+  overflow: hidden;
+}
+
+.worldbuilding .sheet-body .tab {
+  height: 100%;
+  overflow-y: auto;
+
+}
+.worldbuilding .tabs {
+  height: 40px;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+}
+.worldbuilding .tabs .item {
+  line-height: 40px;
+  font-weight: bold;
+}
+.worldbuilding .tabs .item.active {
+  text-decoration: underline;
+  text-shadow: none;
+}
+
+.worldbuilding .editor,
+.worldbuilding .editor-content {
+  height: 100%;
+  width: 100%;
+}
+
+.worldbuilding .editor-content {
+  height: 100%;
+  width: 100%;
+}
+
+.worldbuilding .item-list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+}
+.worldbuilding .item-list .item {
+  height: 30px;
+  line-height: 24px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+}
+.worldbuilding .item-list .item img {
+  flex: 0 0 24px;
+  margin-right: 5px;
+}
+.worldbuilding .item-list .item-name {
+  margin: 0;
+}
+.worldbuilding .item-list .item-controls {
+  flex: 0 0 36px;
+}
+
+
+.worldbuilding .attributes-header {
+  padding: 5px;
+  margin: 5px 0;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+.worldbuilding .attributes-header .attribute-label {
+  flex: 1.5;
+}
+.worldbuilding .attributes-header .attribute-control {
+  flex: 0 0 20px;
+}
+.worldbuilding .attributes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.worldbuilding .attributes-list li > * {
+  margin: 0 3px;
+  height: 28px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #AAA;
+}
+.worldbuilding .attributes-list a.attribute-control {
+  flex: 0 0 20px;
+  text-align: center;
+  line-height: 28px;
+  border: none;
+}
+
+
+.worldbuilding.sheet.actor {
+  min-width: 690px;
+  min-height: 520px; 
+
+
+  
+}
+.worldbuilding.sheet.item {
+  min-width: 460px;
+  min-height: 400px;
+}
