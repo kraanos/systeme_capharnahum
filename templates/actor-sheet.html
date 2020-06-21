@@ -37,7 +37,7 @@
         <a class="item" data-tab="inventaire">Inventaire</a>
         <a class="item" data-tab="biographie">Biographie</a>  
               
-        {{#if game.user.isGM }}        
+        {{#if data.isGM }}        
         <a class="item" data-tab="shaytan">Shaytan</a>
         {{else}}
         prout
@@ -66,11 +66,7 @@
             </table>
             <div class="vertus"> 
                 {{!-- Foi --}}
-                {{data.vertus.foi.label}}
-
-                game USE |{{data.game.user.isGM}}|
-
-
+                {{data.vertus.foi.label}}                
                 <input  class="cases"  type="text"  name="data.vertus.foi.value"  value="{{data.vertus.foi.value}}"  data-dtype="Number"  />  
                 {{data.vertus.foi.etoile.label}}
                 <input  class="cases"  type="text"  name="data.vertus.foi.etoile.value"  value="{{data.vertus.foi.etoile.value}}"  data-dtype="Number"  />            
@@ -218,7 +214,7 @@
             {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>    
 
-        {{#if game.user.isGM }}  
+        {{#if data.isGM }}  
 
             {{!-- Shaytan Tab --}}
             {{!-- ONLY FOR GM --}}
