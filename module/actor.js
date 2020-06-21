@@ -56,14 +56,15 @@ export class SimpleActor extends Actor {
       //Initiative maximum est égal à 1 + ( Souffle + Coordination + Sagesse) / 3 
       data.abilities.init.max =  1 + Math.floor( (data.attributes.souffle.value + data.attributes.coordination.value + data.attributes.sagesse.value)/3  ) ;
 
-      if (super.isPC) {
-
-        console.log("It's not a GM")
-        data.isGM = false;
-      }
-      else
+      console.log(" game.user" + game.user.isGM)
+   
+      if (game.user.isGM) {        
         console.log("It's a GM")
         data.isGM = true;
+      }
+      else
+        console.log("It's not a GM")
+        data.isGM = false;
 
       }
   }

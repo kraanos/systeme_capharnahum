@@ -30,10 +30,10 @@
       }
 
      },
-    "character": {
+    "character": { 
 
       "isGM":{
-        "value" : true
+        "value" : false
       },
       "biographie": {      	
         "label" :"Biographie",
@@ -396,24 +396,47 @@
   "Item": {
     "types": [
       "item",
-      "parole"
+      "parole","weapon", "equipment", "consumable", "tool", "loot",  "backpack"
     ],
     "templates": {
       "itemDescription": {
         "description": ""
       },
-      "parole" : {
+      "parole" : {        
         "description" : "",
         "constellation" : false,
         "competences_constellation" :"",
         "carac_constellation" : "",
         "gain" : ""
-      }
+      },
+      "quantity": {
+        "quantity": {
+        "type": "Number",
+        "label": "Quantité",
+        "value": 1
+        }
+      },
+      "encumbrance": {
+        "encumbrance": {
+        "type": "Number",
+        "label": "Encombrement",
+        "value": 0
+        }
+      },
+      "price": {
+        "price": {
+        "type": "String",
+        "label": "Prix",
+        "gc": 0,
+        "ss": 0,
+        "bp": 0
+        }
+      }      
     },
     "item": {
-      "description": "",
-      "quantity": 1,
-      "weight": 0,
+      "templates": [
+        "itemDescription" ,"quantity"
+      ],
       "attributes": {}
     },
     "parole": {
@@ -421,6 +444,7 @@
         "itemDescription"
       ],
       "substitution": "",
+      "is_a_parole"  : true,
       "detail_parole" : {
         "premiere_parole": {
           "templates": ["itemDescription","parole"
@@ -453,6 +477,33 @@
           "label" : "Sixième Parole"
         }
       }  
+    },
+    "weapon" : {
+      "templates": [
+        "itemDescription", "quantity", "encumbrance", "price"
+      ],
+      "damage": {
+        "type": "String",
+        "label": "Damage",
+        "value" : ""
+      },      
+      "range": {
+        "type": "String",
+        "label": "Range",
+        "value": ""
+      },
+      "twohanded": {
+        "type": "Boolean",
+        "label": "Two-Handed",
+        "value": false
+      },
+      "special": {
+        "type": "String",
+        "label": "Special",
+        "value": ""
+      },
+      "equiped": false,
+      "attributes": {}
     }
   }
 }

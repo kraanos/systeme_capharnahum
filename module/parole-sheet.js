@@ -1,6 +1,6 @@
 /**
  * Extend the basic ItemSheet with some very simple modifications
- * @extends {ParoleItemSheet}
+ * @extends {ItemSheet}
  */
 export class ParoleItemSheet extends ItemSheet {
 

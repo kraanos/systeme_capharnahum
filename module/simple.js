@@ -9,6 +9,7 @@ import { SimpleActor } from "./actor.js";
 import { SimpleItemSheet } from "./item-sheet.js";
 import { SimpleActorSheet } from "./actor-sheet.js";
 import { ParoleItemSheet } from "./parole-sheet.js";
+import { WeaponItemSheet } from "./weapon-sheet.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -36,6 +37,7 @@ Hooks.once("init", async function() {
   Items.registerSheet("systeme_capharnahum", SimpleItemSheet, {makeDefault: true});
   //Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("systeme_capharnahum", ParoleItemSheet);
+  Items.registerSheet("systeme_capharnahum", WeaponItemSheet);
 
 
   // Register system settings

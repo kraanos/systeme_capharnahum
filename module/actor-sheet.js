@@ -50,6 +50,22 @@ export class SimpleActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });   
 
+    // Change Equiped / Not equiped Item
+    html.find('.item-change-equiped').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.getOwnedItem(li.data("itemId"));
+
+      if (item.data.data.equiped) {
+        item.data.data.equiped = false ;
+      }
+      else {
+        item.data.data.equiped = true ;
+      }
+      this.actor.render(true);
+
+      //item.
+    }); 
+
 
     html.find('.isEditable').click(ev => {
         
@@ -70,12 +86,12 @@ export class SimpleActorSheet extends ActorSheet {
     //test de ourimTourim
     html.find('.ourimTourim').click(ev => {
 
-      console.log(" this.actor.data.sheet.editable " + this.actor.data.sheet.editable);
+      //console.log(" this.actor.data.sheet.editable " + this.actor.data.sheet.editable);
 
       let ourimEtTourim = Math.floor(Math.random() * 2);
       console.log("ourim et tourim " + ourimEtTourim)
       let msg = "Vous avez choisi d'interroger les dieux ..." ;
-
+      
       if (ourimEtTourim == 0) {
         //Ourim
         let ourim = "! OURIM !" ;
@@ -115,40 +131,36 @@ export class SimpleActorSheet extends ActorSheet {
     // test comp
     html.find('.rollable').click(ev => {
 
-    // boite de dialogue et choix de la carac
-    let carac ;
-    let vantardise = 0;
-    let sous_comp = ev.currentTarget.getAttribute('value');
-    console.log(" sous comp: " + sous_comp);
+      // boite de dialogue et choix de la carac
+      let carac ;
+      let vantardise = 0;
+      let sous_comp = ev.currentTarget.getAttribute('value');
+      console.log(" sous comp: " + sous_comp);
 
-    let dataType = ev.currentTarget.getAttribute('data-type');
-    console.log(dataType);
+      let dataType = ev.currentTarget.getAttribute('data-type');
+      console.log(dataType);
 
-    console.log(" sous comp: " + sous_comp);
-    console.log("Ouverture de la fenetre de vantardise")
-    
+      console.log(" sous comp: " + sous_comp);
+      console.log("Ouverture de la fenetre de vantardise") 
+  
+      if (dataType == "jet-de-sous-competences") {
+        this.dialogCaracteristique(ev)    
+      }
+      if (dataType == "jet-de-caracteristiques") {      
+        let carac = ev.currentTarget.getAttribute('value');
+        console.log("carac avant vantardise " + carac)
+        this.dialogVantardise(ev, carac)
+      }  
+
+      if (dataType == "jet-de-initiative") {
+        let initiative =  new Roll(  "1d" + this.actor.data.data.abilities.init.max);
+        initiative.roll();
         
- 
-    if (dataType == "jet-de-sous-competences") {
-      this.dialogCaracteristique(ev)     
+        this.actor.data.data.abilities.init.value = initiative.total;
+        console.log("initiative lancée est de " + initiative.total) ;
+        console.log("this.actor.data.data.abilities.init.value est de " + this.actor.data.data.abilities.init.value) ;
 
-    }
-    if (dataType == "jet-de-caracteristiques") {      
-      let carac = ev.currentTarget.getAttribute('value');
-      console.log("carac avant vantardise " + carac)
-      this.dialogVantardise(ev, carac)
-    }  
-
-    if (dataType == "jet-de-initiative") {
-      let initiative =  new Roll(  "1d" + this.actor.data.data.abilities.init.max);
-      initiative.roll();
-      
-      this.actor.data.data.abilities.init.value = initiative.total;
-      console.log("initiative lancée est de " + initiative.total) ;
-      console.log("this.actor.data.data.abilities.init.value est de " + this.actor.data.data.abilities.init.value) ;
-
-    }  
-
+      }  
     });
   }
 
@@ -281,7 +293,8 @@ export class SimpleActorSheet extends ActorSheet {
     let valueDeDragon = this.actor.data.data.abilities.dragon.value;          
 
     // tableau contenant chaque jet de dé, en dehors des dés dragons
-    let tousLesDesDragons = [0];
+    let tousLesDesDragons ;    
+   
     //Lancement des dés dragons
     tousLesDesDragons = this.lancerDesDragons(valueDeDragon);
 
@@ -292,7 +305,7 @@ export class SimpleActorSheet extends ActorSheet {
     totalDesNormaux = totalDesNormaux - valueDeDragon;
 
     // tableau contenant chaque jet de dé, en dehors des dés dragons
-    let résultatDésNormaux = [0];
+    let résultatDésNormaux ;
     //Lancement des dés normaux  
     résultatDésNormaux = this.lancerDesNormaux(totalDesNormaux);         
     
@@ -360,7 +373,8 @@ export class SimpleActorSheet extends ActorSheet {
           let valueDeDragon = this.actor.data.data.abilities.dragon.value;          
 
           // tableau contenant chaque jet de dé, en dehors des dés dragons
-          let tousLesDesDragons = [0];
+          let tousLesDesDragons ;
+
           //Lancement des dés dragons
           tousLesDesDragons = this.lancerDesDragons(valueDeDragon);
 
@@ -371,7 +385,7 @@ export class SimpleActorSheet extends ActorSheet {
           totalDesNormaux = totalDesNormaux - valueDeDragon;
 
           // tableau contenant chaque jet de dé, en dehors des dés dragons
-          let résultatDésNormaux = [0];
+          let résultatDésNormaux ;
           //Lancement des dés normaux  
           résultatDésNormaux = this.lancerDesNormaux(totalDesNormaux);         
      
@@ -388,15 +402,29 @@ export class SimpleActorSheet extends ActorSheet {
     let result = [0,0,0,0,0,0];
     //console.log("result " + result)
 
-    tab.forEach(function(elem){
-      //console.log("elem " + elem)
-      if(elem-1 in result){
-        result[elem-1] = ++result[elem-1];        
+   
+
+    tab.rolls[0].dice[0].rolls.forEach(function(elem){
+      console.log("result " + result)
+      if(elem.roll -1 in result){
+        result[elem.roll-1] = ++result[elem.roll-1];        
       }
       else{
-        result[elem-1] = 1;       
+        result[elem.roll-1] = 1;       
       }
     });
+
+    tab.rolls[1].dice[0].rolls.forEach(function(elem){
+      //console.log("elem " + elem)
+      if(elem.roll-1 in result){
+        result[elem.roll-1] = ++result[elem.roll-1];        
+      }
+      else{
+        result[elem.roll-1] = 1;       
+      }
+    });
+
+
     console.log("result " + result)
     return result;
   }
@@ -426,11 +454,28 @@ export class SimpleActorSheet extends ActorSheet {
         console.log("affichage_constellation_reussie " + affichage_constellation_reussie)
         return affichage_constellation_reussie.constellationPresente;    
   }
-  lancerDesDragons(valueDeDragon){
-    //Lancement des dés dragons      
-    
-    let tousLesDesDragons = [0];
+ 
 
+  lancerDesDragons(valueDeDragon){
+
+
+    // banc de test de la classe roll
+    // Consider 3 rolls
+    /*
+    let desDragons = new Roll(valueDeDragon + "d6x>5");
+    desDragons.roll();
+    return desDragons 
+*/
+    //Lancement des dés dragons      
+
+    let desDragons = new Roll(valueDeDragon + "d6x>5");
+    desDragons.roll();
+    console.log("desDragons ")
+    console.log("desDragons " + desDragons.dice[0].rolls.length);
+    return desDragons
+    /*
+    let tousLesDesDragons = [0];
+    
     // pour chaque dé dragon
     for (let i = 0; i < valueDeDragon ; i++) {
 
@@ -440,6 +485,7 @@ export class SimpleActorSheet extends ActorSheet {
       tousLesDesDragons[i] = r.total ;
     }
 
+
     // console.log affichage dans la console du résultat de chaque dés dragons
     //:tousLesDesDragons.forEach(function(item, index, array) {
     //  console.log(item, index);
@@ -447,11 +493,27 @@ export class SimpleActorSheet extends ActorSheet {
     console.log("Dés Dragons " + tousLesDesDragons);
 
     return tousLesDesDragons
+
+    */
   }
     //Lancement des dés normaux    
     // retour un tableau de dés triés par ordre décroissant
   lancerDesNormaux(nombreDeDés){  
     
+    let desNormaux = new Roll(nombreDeDés + "d6");
+    desNormaux.roll();
+
+    console.log("desNormaux " + desNormaux.dice[0].rolls.length);
+    desNormaux.dice[0].rolls.sort(function(a, b) {
+      if ( b.roll <= a.roll)
+        return -1;
+      if ( b.roll > a.roll)
+        return 1;     
+    });
+
+    return desNormaux 
+    /*
+
     // tableau contenant chaque jet de dé, en dehors des dés dragons
           let résultatDésNormaux = [0];
           for (let i = 0; i < nombreDeDés ; i++) {
@@ -472,44 +534,70 @@ export class SimpleActorSheet extends ActorSheet {
           console.log("Dés normaux " + résultatDésNormaux);
 
     return résultatDésNormaux
-  }
 
+    */
+  }
+  
+   getRollFromPool(pool) {
+    const roll = new Roll();
+    roll._result = [pool.total];
+    roll._total = pool.total;
+    roll._dice = pool.dice;
+    roll._parts = [pool];
+    roll._rolled = true;
+    return roll;
+  }
 
   createMessage(rollFormula, rollResultDéDragon, rollResultAutreDé, rollType, valueCarac,vantardise) {
 
+    let pooOfDice = new DicePool([rollResultAutreDé,rollResultDéDragon]);
+    
+    
+
+    console.log("rollFormula"  + rollFormula)
     let caracAvecVantardise = 0;
         if (valueCarac > vantardise) {
           caracAvecVantardise = valueCarac - vantardise ;
         }
 
-    if (rollResultDéDragon.length == 2 && valueCarac == 1){
-
+    if (rollResultDéDragon.dice[0].rolls.length == 2 && valueCarac == 1){
+      
         // Dans ce cas, on a plus qu'un seul dé dragon 
         // tri du tableau des dés du plus grand au plus petit
-          rollResultDéDragon.sort(function(a, b) {
+        rollResultDéDragon.dice[0].rolls.sort(function(a, b) {
             return b - a;
           });
 
           // on garde que le meilleur dé dragon
-          rollResultDéDragon.splice(1,1);
+          rollResultDéDragon.dice[0].rolls.splice(1,1);
         console.log("rollResultDéDragon " + rollResultDéDragon)
 
     }
-    if (rollResultDéDragon.length == 1)
+    if (rollResultDéDragon.dice[0].rolls.length == 1)
     {
         let toucherAvecDragon = 0;        
         let qualiteSansDragon = 0;
 
+        let toucherAvecDragonNew = 0;
+        let qualiteSansDragonNew = 0;
         //Concaténation du dés dragons du côté du toucher, au début
-        let deDragonCoteReussite = rollResultDéDragon.concat(rollResultAutreDé)  ;
+
+        //toucherAvecDragon = DicePool
+        // DicePool
+
+        toucherAvecDragonNew = rollResultDéDragon.total ;
+
+        //let deDragonCoteReussite = rollResultDéDragon.concat(rollResultAutreDé)  ;
         //console.log("deDragonCoteReussite " + deDragonCoteReussite)
         
         for (let i = 0; i < caracAvecVantardise  ; i++) {          
-          toucherAvecDragon = toucherAvecDragon + deDragonCoteReussite[i];
+          //toucherAvecDragon = toucherAvecDragon + deDragonCoteReussite[i];
+          toucherAvecDragonNew = toucherAvecDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
         }        
 
-        for (let i = caracAvecVantardise ; i < deDragonCoteReussite.length ; i++) {          
-          qualiteSansDragon = qualiteSansDragon + deDragonCoteReussite[i];
+        for (let i = caracAvecVantardise ; i < rollResultAutreDé.dice[0].rolls.length ; i++) {          
+          //qualiteSansDragon = qualiteSansDragon + deDragonCoteReussite[i];
+          qualiteSansDragonNew = qualiteSansDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
         }
         //console.log("toucherAvecDragon " + toucherAvecDragon)
         //console.log("toucherAvecDragon " + toucherAvecDragon)
@@ -518,26 +606,30 @@ export class SimpleActorSheet extends ActorSheet {
         let toucherSansDragon = 0;
         let qualitéAvecDragon = 0;
 
+        let toucherSansDragonNew = 0;
+        let qualitéAvecDragonNew = 0;
         //Concaténation du dés dragons du côté de la qualité à la fin
-        let deDragonCoteQualite =   rollResultAutreDé.concat(rollResultDéDragon)  ;        
+        //let deDragonCoteQualite =   rollResultAutreDé.concat(rollResultDéDragon)  ;        
         //console.log("deDragonCoteQualite " + deDragonCoteQualite)
 
         
         for (let i = 0; i < caracAvecVantardise    ; i++) {              
-          toucherSansDragon = toucherSansDragon + deDragonCoteQualite[i];          
+          //toucherSansDragon = toucherSansDragon + deDragonCoteQualite[i];  
+          toucherSansDragonNew = toucherSansDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;         
         }
         
-        for (let i = caracAvecVantardise; i < deDragonCoteQualite.length ; i++) {              
-          qualitéAvecDragon = qualitéAvecDragon + deDragonCoteQualite[i];
+        for (let i = caracAvecVantardise; i < rollResultAutreDé.dice[0].rolls.length ; i++) {              
+          //qualitéAvecDragon = qualitéAvecDragon + deDragonCoteQualite[i];
+          qualitéAvecDragonNew = qualitéAvecDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
         }
         
-        let QRSansDragon = Math.floor(qualiteSansDragon/3);
-        let QRAvecDragon = Math.floor(qualitéAvecDragon/3);
+        let QRSansDragon = Math.floor(qualiteSansDragonNew/3);
+        let QRAvecDragon = Math.floor(qualitéAvecDragonNew/3);
 
 
         // gestion des constellations  
         let affichage_constellation_reussie = { message : "", constellationPresente : false};
-        this.gestionDesConstellations(deDragonCoteQualite,affichage_constellation_reussie);
+        this.gestionDesConstellations(pooOfDice,affichage_constellation_reussie);
 
          if(affichage_constellation_reussie.constellationPresente) {
           console.log("la constellation est presente ")
@@ -576,16 +668,27 @@ export class SimpleActorSheet extends ActorSheet {
               console.log("toucherSansDragon " + toucherSansDragon)
               console.log("qualitéAvecDragon " + qualitéAvecDragon)
         let template = 'systems/systeme_capharnahum/templates/cards/roll-card.html';
+
+               
+        let rollForModule = new Roll("15d6");
+        rollForModule.roll();           
+          
+        pooOfDice.roll();
+        let goForRoll  = this.getRollFromPool(pooOfDice);
+        console.log("goForRoll" + goForRoll)
+
         renderTemplate(template, templateData).then(content => {
         ChatMessage.create({
          speaker: ChatMessage.getSpeaker({ actor: this.actor}), 
-         content: content
+         content: content,
+         type: CHAT_MESSAGE_TYPES.ROLL,
+         roll: goForRoll
         });   
         });
     }
     else {
     // deux dés dragons
-      if (rollResultDéDragon.length == 2){
+      if (rollResultDéDragon[0].rolls.length == 2){
         console.log("deux dés dragons !");
         
         let affichageDeDragon = "";       
@@ -739,7 +842,7 @@ export class SimpleActorSheet extends ActorSheet {
       }
       else {
         // trois dés dragons
-        if (rollResultDéDragon.length == 1){
+        if (rollResultDéDragon[0].rolls.length == 3){
           console.log("trois dés dragons !");
 
           // Compromis : j'ai implementé les 2 dés dragons
