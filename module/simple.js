@@ -11,6 +11,7 @@ import { SimpleActorSheet } from "./actor-sheet.js";
 import { ParoleItemSheet } from "./parole-sheet.js";
 import { WeaponItemSheet } from "./weapon-sheet.js";
 
+
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */

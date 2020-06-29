@@ -41,7 +41,7 @@
       }, 
       "sang": {
       	"label" :"Sang",
-      	"value" :""
+      	"value" : [ "Saabi", "Agalanthéen", "Shiradim", "Escarte", "autre"]
       }, 
       "nation": {
       	"label" :"Nation, Tribu ou Cité Etat",
@@ -93,7 +93,7 @@
           "etoile" : {
             "label" : "Etoile de Bravoure", 
             "template" : ["etoile_de_vertu"]
-            }
+            } 
         },      
         "fidelite" : {
           "template" : ["vertus"],
@@ -145,6 +145,12 @@
         },
         "pointaventure" : {
           "label" : "Point d'aventure",
+          "value": 0,
+          "min": 1
+          
+        },
+        "DeEntrainement" : {
+          "label" : "Dés d'entrainement",
           "value": 0,
           "min": 1
           
@@ -503,6 +509,7 @@
         "value": ""
       },
       "equiped": false,
+      "is_a_weapon"  : true,
       "attributes": {}
     }
   }

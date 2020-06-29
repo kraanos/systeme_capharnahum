@@ -23,7 +23,6 @@
   margin-right: 10px;
 }
 .worldbuilding .sheet-header .header-fields {
-  
   height: 100%;
   width:  100%;
 
@@ -56,7 +55,7 @@ height: 30px;
   flex: 0 0 100px;
   height: 55px;
   margin-right: 10px;
-  
+  background-image: url("../assets/icones/ourim_et_tourim.png");
   background-repeat: no-repeat;
 }
 
@@ -71,32 +70,19 @@ height: 30px;
   width: 25px;
   height: 33px;
   margin-right: 5px;
-  
-}
-
-.worldbuilding .isEditable:hover {
-  color: #000;
-  cursor: pointer;
-  text-shadow: 0 0 10px #ff0000; 
-}
-
-.worldbuilding .isNotEditable {
-  width: 25px;
-  height: 33px;
-  margin-right: 5px;
-  
-}
-
-.worldbuilding .isNotEditable:hover {
-  color: #000;
-  cursor: pointer;
-  text-shadow: 0 0 10px #ff0000; 
 }
 
 .worldbuilding .image_header {
   width: :150px;
   height: 100px;
   margin-right: 10px;
+}
+
+.worldbuilding .image_header_petite_icone {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 
@@ -114,7 +100,10 @@ justify-content: space-around;
   text-align: center;
   valign: center;
 }
-
+.worldbuilding .elements {
+  text-align: center;
+  valign: center;
+}
 .worldbuilding .combat {
   text-align: center;
   valign: center;
@@ -159,7 +148,7 @@ justify-content: space-around;
 
 .worldbuilding .competencesGenerales  {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: space-around;
 }
 
@@ -223,7 +212,7 @@ justify-content: space-around;
 .worldbuilding .item-list .item {
   height: 30px;
   line-height: 24px;
-  padding: 3px 0;
+  padding: 3px 0; 
   border-bottom: 1px solid #BBB;
 }
 .worldbuilding .item-list .item img {

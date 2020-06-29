@@ -24,7 +24,7 @@ export class SimpleItemSheet extends ItemSheet {
     for ( let attr of Object.values(data.data.attributes) ) {
       attr.isCheckbox = attr.dtype === "Boolean";
     }
-    return data;
+    return data; 
   }
 
   /* -------------------------------------------- */

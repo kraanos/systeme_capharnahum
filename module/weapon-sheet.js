@@ -12,7 +12,7 @@ export class WeaponItemSheet extends ItemSheet {
               width: 520,
               height: 480,
         tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "details"}]
-          });
+          }); 
     }
   
     /* -------------------------------------------- */
