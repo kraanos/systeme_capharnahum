@@ -62,7 +62,7 @@ export class SimpleActorSheet extends ActorSheet {
         item.data.data.equiped = true ;
       }
       this.actor.render(true);
-
+    
       //item.
     }); 
 
