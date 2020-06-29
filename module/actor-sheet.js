@@ -445,37 +445,23 @@ export class SimpleActorSheet extends ActorSheet {
     }  
 
 
-  countOccurences(tab) {
-    console.log("tab " + tab)
-    let result = [0,0,0,0,0,0];
-    //console.log("result " + result)
-
-   
-
-    tab.rolls[0].dice[0].rolls.forEach(function(elem){
+    countOccurences(tab) {
+      console.log("tab " + tab)
+      let result = [0,0,0,0,0,0];
+      //console.log("result " + result)
+  
+      tab.forEach(function(elem){
+        //console.log("elem " + elem)
+        if(elem-1 in result){
+          result[elem-1] = ++result[elem-1];        
+        }
+        else{
+          result[elem-1] = 1;       
+        }
+      });
       console.log("result " + result)
-      if(elem.roll -1 in result){
-        result[elem.roll-1] = ++result[elem.roll-1];        
-      }
-      else{
-        result[elem.roll-1] = 1;       
-      }
-    });
-
-    tab.rolls[1].dice[0].rolls.forEach(function(elem){
-      //console.log("elem " + elem)
-      if(elem.roll-1 in result){
-        result[elem.roll-1] = ++result[elem.roll-1];        
-      }
-      else{
-        result[elem.roll-1] = 1;       
-      }
-    });
-
-
-    console.log("result " + result)
-    return result;
-  }
+      return result;
+    }
 
   gestionDesConstellations (ensemble_des_Des,affichage_constellation_reussie) {
 
@@ -506,22 +492,8 @@ export class SimpleActorSheet extends ActorSheet {
 
   lancerDesDragons(valueDeDragon){
 
-
-    // banc de test de la classe roll
-    // Consider 3 rolls
-    /*
-    let desDragons = new Roll(valueDeDragon + "d6x>5");
-    desDragons.roll();
-    return desDragons 
-*/
     //Lancement des dés dragons      
 
-    let desDragons = new Roll(valueDeDragon + "d6x>5");
-    desDragons.roll();
-    console.log("desDragons ")
-    console.log("desDragons " + desDragons.dice[0].rolls.length);
-    return desDragons
-    /*
     let tousLesDesDragons = [0];
     
     // pour chaque dé dragon
@@ -533,7 +505,6 @@ export class SimpleActorSheet extends ActorSheet {
       tousLesDesDragons[i] = r.total ;
     }
 
-
     // console.log affichage dans la console du résultat de chaque dés dragons
     //:tousLesDesDragons.forEach(function(item, index, array) {
     //  console.log(item, index);
@@ -541,26 +512,11 @@ export class SimpleActorSheet extends ActorSheet {
     console.log("Dés Dragons " + tousLesDesDragons);
 
     return tousLesDesDragons
-
-    */
+    
   }
     //Lancement des dés normaux    
     // retour un tableau de dés triés par ordre décroissant
   lancerDesNormaux(nombreDeDés){  
-    
-    let desNormaux = new Roll(nombreDeDés + "d6");
-    desNormaux.roll();
-
-    console.log("desNormaux " + desNormaux.dice[0].rolls.length);
-    desNormaux.dice[0].rolls.sort(function(a, b) {
-      if ( b.roll <= a.roll)
-        return -1;
-      if ( b.roll > a.roll)
-        return 1;     
-    });
-
-    return desNormaux 
-    /*
 
     // tableau contenant chaque jet de dé, en dehors des dés dragons
           let résultatDésNormaux = [0];
@@ -583,19 +539,8 @@ export class SimpleActorSheet extends ActorSheet {
 
     return résultatDésNormaux
 
-    */
   }
-  
-   getRollFromPool(pool) {
-    const roll = new Roll();
-    roll._result = [pool.total];
-    roll._total = pool.total;
-    roll._dice = pool.dice;
-    roll._parts = [pool];
-    roll._rolled = true;
-    return roll;
-  }
-
+  /*
   entrainement (QR,Toucher,nomCarac,nomComp) {
 
     if ( nomCarac =="Souffle" && nomComp == "Entraînement") {
@@ -621,18 +566,22 @@ export class SimpleActorSheet extends ActorSheet {
       this.actor.render(true);
     }
   }
+  */
  
 
   createMessage(rollFormula, rollResultDéDragon, rollResultAutreDé, rollType, nomCarac, valueCarac, nomComp,valueComp,vantardise) {
 
-    let pooOfDice;
+
     // Si le résultat des autres dés est null, on a que 1 dé carac qui est le dragon
+
+    /*
     if (rollResultAutreDé != null) {
     pooOfDice = new DicePool([rollResultAutreDé,rollResultDéDragon]);
     }
     else {
       pooOfDice = new DicePool([rollResultDéDragon]);
     }
+    */
         
     console.log("rollFormula"  + rollFormula)
 
@@ -647,58 +596,50 @@ export class SimpleActorSheet extends ActorSheet {
     // on garde que le meilleur dé dragon
     if (this.actor.data.data.abilities.dragon.value == 2 && valueCarac == 1){      
 
-        rollResultDéDragon.dice[0].rolls.sort(function(a, b) {
-            return b - a;
-          });
-          
-          rollResultDéDragon.dice[0].rolls.splice(1,1);
-        console.log("rollResultDéDragon " + rollResultDéDragon)
+        // Dans ce cas, on a plus qu'un seul dé dragon 
+        // tri du tableau des dés du plus grand au plus petit
+        rollResultDéDragon.sort(function(a, b) {
+          return b - a;
+        });
+
+        // on garde que le meilleur dé dragon
+        rollResultDéDragon.splice(1,1);
+      console.log("rollResultDéDragon " + rollResultDéDragon)
     }
 
     // Si on un seul dé dragon
     if (this.actor.data.data.abilities.dragon.value == 1)
     {
-        if (rollResultAutreDé != null)  {
-
         
           let toucherAvecDragon = 0;        
           let qualiteSansDragon = 0;
 
-          let toucherAvecDragonNew = 0;
-          let qualiteSansDragonNew = 0;
           //Concaténation du dés dragons du côté du toucher, au début
-
-          //toucherAvecDragon = DicePool
-          // DicePool
-
-          toucherAvecDragonNew = rollResultDéDragon.total ;
-
-          //let deDragonCoteReussite = rollResultDéDragon.concat(rollResultAutreDé)  ;
+          let deDragonCoteReussite = rollResultDéDragon.concat(rollResultAutreDé)  ;
           //console.log("deDragonCoteReussite " + deDragonCoteReussite)
           
-          for (let i = 0; i < caracAvecVantardise -1  ; i++) {          
-            //toucherAvecDragon = toucherAvecDragon + deDragonCoteReussite[i];
-            toucherAvecDragonNew = toucherAvecDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
+          for (let i = 0; i < caracAvecVantardise   ; i++) {          
+            toucherAvecDragon = toucherAvecDragon + deDragonCoteReussite[i];           
           }        
 
-          for (let i = caracAvecVantardise -1 ; i < rollResultAutreDé.dice[0].rolls.length ; i++) {          
-            //qualiteSansDragon = qualiteSansDragon + deDragonCoteReussite[i];
-            qualiteSansDragonNew = qualiteSansDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
+          for (let i = caracAvecVantardise  ; i < deDragonCoteReussite.length ; i++) {          
+            qualiteSansDragon = qualiteSansDragon + deDragonCoteReussite[i];
+          
           }
           //console.log("toucherAvecDragon " + toucherAvecDragon)
           //console.log("toucherAvecDragon " + toucherAvecDragon)
 
           let toucherSansDragon = 0;
           let qualitéAvecDragon = 0;
-          let toucherSansDragonNew = 0;
-          let qualitéAvecDragonNew = 0;
           //Concaténation du dés dragons du côté de la qualité à la fin
-          //let deDragonCoteQualite =   rollResultAutreDé.concat(rollResultDéDragon)  ;        
+          let deDragonCoteQualite =   rollResultAutreDé.concat(rollResultDéDragon)  ;        
           //console.log("deDragonCoteQualite " + deDragonCoteQualite)
 
           // Si la comp est de 0 et qu'il n'y a pas de vantardise.
           // tous les dés se rangent du côté du toucher
           // il faut en prendre 1 de moins dans rollResultAutreDé sinon on dépasse et error
+
+          /*
           if (valueComp == 0  && vantardise==0) {
             caracAvecVantardise = caracAvecVantardise -1;
             toucherSansDragonNew = toucherSansDragonNew +rollResultDéDragon.total ;
@@ -706,29 +647,30 @@ export class SimpleActorSheet extends ActorSheet {
           else {
             qualitéAvecDragonNew = qualitéAvecDragonNew + rollResultDéDragon.total ;
           }
+          */
 
           for (let i = 0; i < caracAvecVantardise     ; i++) {              
-            //toucherSansDragon = toucherSansDragon + deDragonCoteQualite[i];  
-            toucherSansDragonNew = toucherSansDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;         
+            toucherSansDragon = toucherSansDragon + deDragonCoteQualite[i];  
+                
           }        
           
-          for (let i = caracAvecVantardise  ; i < rollResultAutreDé.dice[0].rolls.length ; i++) {              
-            //qualitéAvecDragon = qualitéAvecDragon + deDragonCoteQualite[i];
-            qualitéAvecDragonNew = qualitéAvecDragonNew + rollResultAutreDé.dice[0].rolls[i].roll;
+          for (let i = caracAvecVantardise  ; i < deDragonCoteQualite.length ; i++) {              
+            qualitéAvecDragon = qualitéAvecDragon + deDragonCoteQualite[i];
+            
           }
           
-          let QRSansDragon = Math.floor(qualiteSansDragonNew/3);
-          let QRAvecDragon = Math.floor(qualitéAvecDragonNew/3);
+          let QRSansDragon = Math.floor(qualiteSansDragon/3);
+          let QRAvecDragon = Math.floor(qualitéAvecDragon/3);
           console.log("QRSansDragon " + QRSansDragon)
           console.log("QRAvecDragon " + QRAvecDragon)
 
 
-          this.entrainement ( [QRSansDragon,QRAvecDragon],[toucherAvecDragonNew,toucherSansDragonNew], nomCarac, nomComp ) ;        
+          //this.entrainement ( [QRSansDragon,QRAvecDragon],[toucherAvecDragonNew,toucherSansDragonNew], nomCarac, nomComp ) ;        
 
 
           // gestion des constellations  
           let affichage_constellation_reussie = { message : "", constellationPresente : false};
-          this.gestionDesConstellations(pooOfDice,affichage_constellation_reussie);
+          this.gestionDesConstellations(deDragonCoteQualite,affichage_constellation_reussie);
 
           if(affichage_constellation_reussie.constellationPresente) {
             console.log("la constellation est presente ")
@@ -741,18 +683,20 @@ export class SimpleActorSheet extends ActorSheet {
           }
           
           console.log("affichage_constellation_reussie" + affichage_constellation_reussie)
-          let messageToucherAvecDragon = "Toucher " + toucherAvecDragonNew + " QR " + QRSansDragon + " (" + qualiteSansDragonNew +")";
-          let messageToucherSansDragon = "Toucher " + toucherSansDragonNew + " QR " + QRAvecDragon + " (" + qualitéAvecDragonNew +")";
+          let messageToucherAvecDragon = "Toucher " + toucherAvecDragon + " QR " + QRSansDragon + " (" + qualiteSansDragon +")";
+          let messageToucherSansDragon = "Toucher " + toucherSansDragon + " QR " + QRAvecDragon + " (" + qualitéAvecDragon +")";
 
           let messagePourAutreDe = "Autres dés --> ";
           
-          for (let i = 0; i < rollResultAutreDé.dice[0].rolls.length ; i++) { 
-                console.log("rollResultAutreDé.dice[0].rolls[i].roll " + rollResultAutreDé.dice[0].rolls[i].roll)             
-                messagePourAutreDe +=  rollResultAutreDé.dice[0].rolls[i].roll + " " ;
+          for (let i = 0; i < rollResultAutreDé.length ; i++) {              
+            messagePourAutreDe +=  rollResultAutreDé[i] + " " ;
+            if (i != rollResultAutreDé.length-1) {
+              messagePourAutreDe += " - " ;
+            }
           }
           console.log("messagePourAutreDe " + messagePourAutreDe)
 
-          let messageDeDragon = "Dé Dragon  --> " + rollResultDéDragon.total;
+          let messageDeDragon = "Dé Dragon  --> " + rollResultDéDragon[0];
           console.log("messageDeDragon")
           var templateData = {
             data: {
@@ -775,62 +719,6 @@ export class SimpleActorSheet extends ActorSheet {
             content: content
             });   
             });
-          
-             /*      
-            let rollForModule = new Roll("15d6");
-            rollForModule.roll();      
-            let test = new DicePool([rollForModule,rollForModule]);
-            test.roll();
-            let goForRoll1  = this.getRollFromPool(test);
-            renderTemplate(template, templateData).then(content => {
-              ChatMessage.create({
-              speaker: ChatMessage.getSpeaker({ actor: this.actor}), 
-              content: content,
-              type: CHAT_MESSAGE_TYPES.ROLL,
-              roll: goForRoll1
-              });   
-              });
-
-
-            pooOfDice.roll();
-            let goForRoll  = this.getRollFromPool(pooOfDice);
-            console.log("goForRoll" + goForRoll)
-
-            renderTemplate(template, templateData).then(content => {
-            ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor}), 
-            content: content,
-            type: CHAT_MESSAGE_TYPES.ROLL,
-            roll: test
-            });   
-            });
-            */
-
-            
-        }
-        else { // si les autres dés sont NULL, on a qu'un seul dé et donc le dragon
-        
-        let messageToucherAvecDragon = "Toucher " + rollResultDéDragon.total + " pas de QR " ;
-          var templateData = {
-            data: {
-              rollType: { value: rollType },
-              rollFormula: { value: rollFormula },
-              rollmessageToucherAvecDragon: { value: messageToucherAvecDragon }  
-            }
-            };
-            //console.log("toucherSansDragon " + toucherSansDragon)
-            //console.log("qualitéAvecDragon " + qualitéAvecDragon)
-          let template = 'systems/systeme_capharnahum/templates/cards/roll-card-alone-dice.html';
-        
-          renderTemplate(template, templateData).then(content => {
-            ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor}), 
-            content: content
-            });   
-            });
-
-        }  
-          
         
     }
     else {
@@ -854,12 +742,12 @@ export class SimpleActorSheet extends ActorSheet {
 
         // toucher correspond au nombre de dés de la caractéristique.
         let toucherD1D2 = 0;
-        let toucherD1D2New = 0;
+        let toucherD1D2New = 0;        
         // la qualité correspond au nombre de dés restants
         let qualiteSansDragon = 0;
-        let qualiteSansDragonNew = 0;
+
         let d1D2Reussite =   rollResultDéDragon.concat(rollResultAutreDé)  ; 
-        let d1D2ReussiteNew = rollResultDéDragon.dice[0].rolls
+
 
 
         for (let i = 0; i < caracAvecVantardise  ; i++) {          
